@@ -99,9 +99,35 @@ app.get('/product/:id', token.verify, async (req: Request, res:Response) => {
     );
 });
 
-//TODO: Search cars by category
+app.get('/category/:name', token.verify, async (req: Request, res:Response) => {
+    const { name } = req.params;
+    
+    const result = await mongodb.db.collection('cars').find({'categoria': {name}}).toArray();
+    
+    res.status(APIStatusEnum.Success).json(
+        apiUtils.BodyResponse(
+            APIStatusEnum.Success, 'OK', 'Successful request.', {
+                result,
+                authUser: req.body.authUser
+            }
+        )
+    );
+});
 
-//TODO: Search cars by keywords
+app.get('/search/:name', token.verify, async (req: Request, res:Response) => {
+    const { name } = req.params;
+    
+    const result = await mongodb.db.collection('cars').find({'descripcion': {$regex : name.toLowerCase(), '$options':'i'}}).toArray();
+    
+    res.status(APIStatusEnum.Success).json(
+        apiUtils.BodyResponse(
+            APIStatusEnum.Success, 'OK', 'Successful request.', {
+                result,
+                authUser: req.body.authUser
+            }
+        )
+    );
+});
 
 //Start Express Server
 app.listen(ENV.API.PORT, async() => {

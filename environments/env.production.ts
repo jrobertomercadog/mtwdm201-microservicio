@@ -9,11 +9,11 @@ export default {
     },
     TOKEN: {
         SHAREDSECRET: 'KaTMyRgQ4MD5lzsaDlJw2uCFNN2exciJ3NahyvcH',
-        EXPIRES: '120s'
+        EXPIRES: '300s'
     },
     MONGODB: {
-        HOST: '127.0.0.1',
-        PORT: 27017,
+        HOST: 'mymongo',
+        PORT: 28017,
         USER_NAME: 'dboperator',
         USER_PASSWORD: 'whateverman123',
         DEFAULT_DATABASE: 'mtwdm'
