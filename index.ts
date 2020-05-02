@@ -14,6 +14,8 @@ import MongoDBClient from 'mongodb'
 //    ENVIRONMENT: process.env.EXPRESS_ENVIRONMENT || 'Development',   
 //};
 
+var cors = require('cors')
+
 //Variables
 const debug = DEBUG();
 const color = COLOR();
@@ -24,7 +26,8 @@ const mongodb = MongoDBHelper.getInstance(ENV);
 
 app.use(Express.urlencoded({extended: true}));
 app.use(Express.json());
-// cors is missing
+app.use(cors())
+app.options('*', cors()) 
 
 app.post('/login', (req: Request, res: Response) => {
     
